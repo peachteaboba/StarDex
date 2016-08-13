@@ -1,5 +1,5 @@
 //
-//  PeopleViewController.swift
+//  SpeciesViewController.swift
 //  StarDex
 //
 //  Created by Andy Feng on 8/13/16.
@@ -9,11 +9,11 @@
 import UIKit
 import Alamofire
 
-class PeopleViewController: UIViewController {
+class SpeciesViewController: UIViewController {
     
     
     
-    @IBOutlet weak var topHeaderView: UIView!
+
     
     
     
@@ -23,8 +23,8 @@ class PeopleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColorFromRGB(0x325cd3)
-
+        self.view.backgroundColor = UIColorFromRGB(0xf2824b)
+        
     }
     
     override func didReceiveMemoryWarning() {

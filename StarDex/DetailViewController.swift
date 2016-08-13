@@ -2,49 +2,48 @@
 //  PeopleViewController.swift
 //  StarDex
 //
-//  Created by Andy Feng on 8/13/16.
+//  Created by Andy Feng on 8/12/16.
 //  Copyright © 2016 Andy Feng. All rights reserved.
 //
 
 import UIKit
-import Alamofire
 
-class PeopleViewController: UIViewController {
+class DetailViewController: UIViewController {
     
     
-    
-    @IBOutlet weak var topHeaderView: UIView!
-    
+    var myVC: HomeViewController?
     
     
     
     
-    // MARK: - View Did Load ----------------------------------------------------------------
+
+    // Dismiss the current view controller and return to the layer under it
+    @IBAction func buttonPressed(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+     
+    
+    
+    // MARK: - Defaults
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColorFromRGB(0x325cd3)
-
+        
+        view.backgroundColor = UIColor.blueColor()
+        view.opaque = false
+        self.view.layer.zPosition = 0
+        
+//        self.view.bringSubviewToFront((self.myVC?.navigationView)!)
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // MARK: - Helper Functions ------------------------------------------------------------
     
     // Helper function to set colors with Hex values
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {
@@ -55,11 +54,4 @@ class PeopleViewController: UIViewController {
             alpha: CGFloat(1.0)
         )
     }
-    
-    
-    
-    
-    
-    
 }
-
