@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "93AADD661D5D3E5000CA786B"
-               BuildableName = "StarDex.app"
-               BlueprintName = "StarDex"
-               ReferencedContainer = "container:StarDex.xcodeproj">
+               BlueprintIdentifier = "4CCB207C1D45563900C64D5B"
+               BuildableName = "Cleanup Whitespace"
+               BlueprintName = "Cleanup Whitespace"
+               ReferencedContainer = "container:Alamofire.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,15 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "93AADD661D5D3E5000CA786B"
-            BuildableName = "StarDex.app"
-            BlueprintName = "StarDex"
-            ReferencedContainer = "container:StarDex.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -51,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "93AADD661D5D3E5000CA786B"
-            BuildableName = "StarDex.app"
-            BlueprintName = "StarDex"
-            ReferencedContainer = "container:StarDex.xcodeproj">
+            BlueprintIdentifier = "4CCB207C1D45563900C64D5B"
+            BuildableName = "Cleanup Whitespace"
+            BlueprintName = "Cleanup Whitespace"
+            ReferencedContainer = "container:Alamofire.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,16 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "93AADD661D5D3E5000CA786B"
-            BuildableName = "StarDex.app"
-            BlueprintName = "StarDex"
-            ReferencedContainer = "container:StarDex.xcodeproj">
+            BlueprintIdentifier = "4CCB207C1D45563900C64D5B"
+            BuildableName = "Cleanup Whitespace"
+            BlueprintName = "Cleanup Whitespace"
+            ReferencedContainer = "container:Alamofire.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
