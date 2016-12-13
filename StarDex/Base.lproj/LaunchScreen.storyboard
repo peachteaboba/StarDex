@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,6 +18,26 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashScreenBG" translatesAutoresizingMaskIntoConstraints="NO" id="BAn-mz-gxK">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starDexSplashScreenLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Sjc-if-a5S">
+                                <rect key="frame" x="165" y="165" width="270" height="270"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="270" id="bQP-Ry-X6l"/>
+                                    <constraint firstAttribute="width" secondItem="Sjc-if-a5S" secondAttribute="height" multiplier="1:1" id="bdd-cm-JN3"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="BAn-mz-gxK" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="C7s-6B-5Lc"/>
+                            <constraint firstItem="BAn-mz-gxK" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-20" id="FsI-Jg-JlQ"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="BAn-mz-gxK" secondAttribute="bottom" id="IUe-JL-Ue8"/>
+                            <constraint firstItem="Sjc-if-a5S" firstAttribute="centerX" secondItem="BAn-mz-gxK" secondAttribute="centerX" id="n9i-6c-ix7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BAn-mz-gxK" secondAttribute="trailing" constant="-20" id="nUv-Zp-3re"/>
+                            <constraint firstItem="Sjc-if-a5S" firstAttribute="centerY" secondItem="BAn-mz-gxK" secondAttribute="centerY" id="rR3-cX-1sz"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -23,4 +45,8 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="splashScreenBG" width="166" height="166"/>
+        <image name="starDexSplashScreenLogo" width="333" height="333"/>
+    </resources>
 </document>

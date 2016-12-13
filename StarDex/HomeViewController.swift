@@ -11,8 +11,9 @@ import Alamofire
 import AudioToolbox
 
 
+
 class HomeViewController: UIViewController {
-    
+    var peopleiImageCache = [String: UIImage]()
 
 //    @IBOutlet weak var bottomLayoutConstraint: NSLayoutConstraint!
 
@@ -26,6 +27,7 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var upArrowIcon: UIImageView!
     
+    @IBOutlet weak var quoteImg: UIImageView!
     
 
     
@@ -34,7 +36,7 @@ class HomeViewController: UIViewController {
     // Top Header
     @IBOutlet weak var navBarHeader: UIView!
     
-    // Nav bar buttons
+    // Nav bar button outlets
     @IBOutlet weak var peopleBox: UIView!
     @IBOutlet weak var filmBox: UIView!
     @IBOutlet weak var starshipBox: UIView!
@@ -51,7 +53,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var planetImage: UIImageView!
     
     
-    
+    // Icon image top constraints
+    @IBOutlet var navIconTopConstraint: [NSLayoutConstraint]!
     
     
     
@@ -77,7 +80,7 @@ class HomeViewController: UIViewController {
     
     
     
-    
+    // MARK: - View did load -------------------------------------------------------------------------
     
     
     override func viewDidLoad() {
@@ -85,12 +88,33 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        self.upArrowIcon.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+        let rand = arc4random_uniform(3) + 1
+        
+        if rand == 1 {
+            self.quoteImg.image = UIImage(named: "quote1")
+        } else if rand == 2 {
+            self.quoteImg.image = UIImage(named: "quote2")
+        } else if rand == 3 {
+            self.quoteImg.image = UIImage(named: "quote3")
+        }
+        
+        
+
+        
+        // Set navigation icon top constraint
+        for icon in self.navIconTopConstraint {
+            icon.constant = self.view.frame.width * 0.05
+        }
+        
+        
+        
+        
+        self.upArrowIcon.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
         
         
         // Hide nav bar on first load
-        self.navigationController?.navigationBarHidden = true
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.navigationController?.isNavigationBarHidden = true
+        self.view.backgroundColor = UIColor.white
         self.navigationView.backgroundColor = UIColorFromRGB(0x1a1d21)
 
         self.view.backgroundColor = UIColorFromRGB(0xEBF2F5)
@@ -116,33 +140,33 @@ class HomeViewController: UIViewController {
         self.navigationViewBottomConstraint.constant = navShowBottomConstraint
         
         let navHeaderTap = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.handleNavHeaderTap))
-        self.navBarHeader.userInteractionEnabled = true
+        self.navBarHeader.isUserInteractionEnabled = true
         self.navBarHeader.addGestureRecognizer(navHeaderTap)
         
         
         let peopleBoxTap = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.handlePeopleBoxTap))
-        self.peopleBox.userInteractionEnabled = true
+        self.peopleBox.isUserInteractionEnabled = true
         self.peopleBox.addGestureRecognizer(peopleBoxTap)
         
         
         let filmBoxTap = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.handleFilmBoxTap))
-        self.filmBox.userInteractionEnabled = true
+        self.filmBox.isUserInteractionEnabled = true
         self.filmBox.addGestureRecognizer(filmBoxTap)
         
         let starshipBoxTap = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.handleStarshipBoxTap))
-        self.starshipBox.userInteractionEnabled = true
+        self.starshipBox.isUserInteractionEnabled = true
         self.starshipBox.addGestureRecognizer(starshipBoxTap)
         
         let vehicleBoxTap = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.handleVehicleBoxTap))
-        self.vehicleBox.userInteractionEnabled = true
+        self.vehicleBox.isUserInteractionEnabled = true
         self.vehicleBox.addGestureRecognizer(vehicleBoxTap)
 
         let speciesBoxTap = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.handleSpeciesBoxTap))
-        self.speciesBox.userInteractionEnabled = true
+        self.speciesBox.isUserInteractionEnabled = true
         self.speciesBox.addGestureRecognizer(speciesBoxTap)
 
         let planetBoxTap = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.handlePlanetBoxTap))
-        self.planetBox.userInteractionEnabled = true
+        self.planetBox.isUserInteractionEnabled = true
         self.planetBox.addGestureRecognizer(planetBoxTap)
 
         
@@ -162,7 +186,7 @@ class HomeViewController: UIViewController {
         
         
         // Instantiates the child view controller named “Component A”
-        self.currentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("startVC")
+        self.currentViewController = self.storyboard?.instantiateViewController(withIdentifier: "startVC")
         
         // Set the auto resizing mask appropriately on the view of the newly constructed child view controller for use with auto layout
         self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
@@ -174,6 +198,8 @@ class HomeViewController: UIViewController {
         
         // Helper method to add a sub view to another view and constrain it with auto layout
         self.addSubview(self.currentViewController!.view, toView: self.containerView)
+        
+        
         
         
         
@@ -204,7 +230,24 @@ class HomeViewController: UIViewController {
     
     // MARK: - Helper Functions --------------------------------------------------------------------------------------------------------
     
-    func animateMenuView(sender: String) {
+    func animateMenuView(_ sender: String) {
+        
+        // SOMETHING TO REMEMBER FROM THE LECTURE :::::::::::::::::
+        
+        // sender.selected = !sender.selected
+        
+        // .constant = sender.selected ? 0 : -70
+        
+        // let buttonText = self.tabBarIsShowing ? "hide" : "show"
+        // self.button.setTitle(buttonText, forState: UIControlState.Normal)
+        
+        
+//        self.navigationController?.modalPresentationStyle = UIModalPresentationStyle.
+        
+        
+        // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        
+        
         
   
         // Amimation -----------------
@@ -219,17 +262,17 @@ class HomeViewController: UIViewController {
             self.navigationViewBottomConstraint.constant = -(self.navigationView.frame.height - 80)
             menuStatus = "down"
             
-            self.upArrowIcon.transform = CGAffineTransformMakeRotation(CGFloat(0))
+            self.upArrowIcon.transform = CGAffineTransform(rotationAngle: CGFloat(0))
             
         } else if sender == "header" {
             
             if menuStatus == "up" {
                 self.navigationViewBottomConstraint.constant = -(self.navigationView.frame.height - 80)
-                self.upArrowIcon.transform = CGAffineTransformMakeRotation(CGFloat(0))
+                self.upArrowIcon.transform = CGAffineTransform(rotationAngle: CGFloat(0))
                 menuStatus = "down"
             } else {
                 self.navigationViewBottomConstraint.constant = navShowBottomConstraint
-                self.upArrowIcon.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+                self.upArrowIcon.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
                 menuStatus = "up"
             }
         }
@@ -242,7 +285,7 @@ class HomeViewController: UIViewController {
         
         // Code to start animation
         self.view.setNeedsLayout()
-        UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 0.45, initialSpringVelocity: 0.7, options: [], animations: {
+        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.45, initialSpringVelocity: 0.7, options: [UIViewAnimationOptions.allowUserInteraction], animations: {
             self.view.layoutIfNeeded()
         }) { (finished) in
             if finished {
@@ -263,38 +306,29 @@ class HomeViewController: UIViewController {
     
     
     func handlePeopleBoxTap() {
+        self.quoteImg.isHidden = true
+        
 //        print("People box pressed")
         animateMenuView("box")
         
         // User pressed the people box. Switch the container view's child view to display peopleVC
-        
-        let newViewController = self.storyboard?.instantiateViewControllerWithIdentifier("peopleVC")
-        
-        newViewController!.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Helper method to do the transition
-        self.cycleFromViewController(self.currentViewController!, toViewController: newViewController!)
-        
-        self.currentViewController = newViewController
-
-        
-//        let peopleVC = self.storyboard?.instantiateViewControllerWithIdentifier("PeopleVC") as! PeopleViewController
-//        peopleVC.modalPresentationStyle = .OverCurrentContext
-//        showDetailViewController(peopleVC, sender: peopleVC)
-//        self.navigationView.layer.zPosition = 1
-//        peopleVC.myVC = self
-        
-        
-        
-        
+        let newViewController = self.storyboard!.instantiateViewController(withIdentifier: "peopleVC") as! PeopleViewController
+        newViewController.imageCache = self.peopleiImageCache
+        newViewController.view.translatesAutoresizingMaskIntoConstraints = false
         setImageColor("people")
         
-   
+        
+        // Helper method to do the transition
+        self.cycleFromViewController(self.currentViewController!, toViewController: newViewController)
+        
+        self.currentViewController = newViewController
+        
     }
     
     func handleFilmBoxTap() {
+        self.quoteImg.isHidden = true
         animateMenuView("box")
-        let newViewController = self.storyboard?.instantiateViewControllerWithIdentifier("filmVC")
+        let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "filmVC")
         newViewController!.view.translatesAutoresizingMaskIntoConstraints = false
         setImageColor("film")
 
@@ -304,8 +338,9 @@ class HomeViewController: UIViewController {
     }
     
     func handleStarshipBoxTap() {
+        self.quoteImg.isHidden = true
         animateMenuView("box")
-        let newViewController = self.storyboard?.instantiateViewControllerWithIdentifier("starshipVC")
+        let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "starshipVC")
         newViewController!.view.translatesAutoresizingMaskIntoConstraints = false
         setImageColor("starship")
         
@@ -315,8 +350,9 @@ class HomeViewController: UIViewController {
     }
     
     func handleVehicleBoxTap() {
+        self.quoteImg.isHidden = true
         animateMenuView("box")
-        let newViewController = self.storyboard?.instantiateViewControllerWithIdentifier("vehicleVC")
+        let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "vehicleVC")
         newViewController!.view.translatesAutoresizingMaskIntoConstraints = false
         setImageColor("vehicle")
         
@@ -326,8 +362,9 @@ class HomeViewController: UIViewController {
     }
     
     func handleSpeciesBoxTap() {
+        self.quoteImg.isHidden = true
         animateMenuView("box")
-        let newViewController = self.storyboard?.instantiateViewControllerWithIdentifier("speciesVC")
+        let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "speciesVC")
         newViewController!.view.translatesAutoresizingMaskIntoConstraints = false
         setImageColor("species")
         
@@ -337,8 +374,9 @@ class HomeViewController: UIViewController {
     }
     
     func handlePlanetBoxTap() {
+        self.quoteImg.isHidden = true
         animateMenuView("box")
-        let newViewController = self.storyboard?.instantiateViewControllerWithIdentifier("planetVC")
+        let newViewController = self.storyboard?.instantiateViewController(withIdentifier: "planetVC")
         newViewController!.view.translatesAutoresizingMaskIntoConstraints = false
         setImageColor("planet")
         
@@ -359,7 +397,7 @@ class HomeViewController: UIViewController {
     
     // Helper function to set image colors
     
-    func setImageColor (sender: String) {
+    func setImageColor (_ sender: String) {
         
         self.peopleImage.image = UIImage(named: "peopleIconW")
         self.filmImage.image = UIImage(named: "filmIconW")
@@ -394,7 +432,7 @@ class HomeViewController: UIViewController {
     
     
     // Helper function to set colors with Hex values
-    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+    func UIColorFromRGB(_ rgbValue: UInt) -> UIColor {
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
@@ -404,14 +442,14 @@ class HomeViewController: UIViewController {
     }
 
     
-    func addSubview(subView:UIView, toView parentView:UIView) {
+    func addSubview(_ subView:UIView, toView parentView:UIView) {
         parentView.addSubview(subView)
         
         var viewBindingsDict = [String: AnyObject]()
         viewBindingsDict["subView"] = subView
-        parentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[subView]|",
+        parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[subView]|",
             options: [], metrics: nil, views: viewBindingsDict))
-        parentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[subView]|",
+        parentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[subView]|",
             options: [], metrics: nil, views: viewBindingsDict))
     }
     
@@ -425,11 +463,11 @@ class HomeViewController: UIViewController {
    
     
     
-    // Helper function to do transitions between child views
+    // Helper function to do transitions between Container View views
     
-    func cycleFromViewController(oldViewController: UIViewController, toViewController newViewController: UIViewController) {
+    func cycleFromViewController(_ oldViewController: UIViewController, toViewController newViewController: UIViewController) {
         
-        oldViewController.willMoveToParentViewController(nil)
+        oldViewController.willMove(toParentViewController: nil)
         self.addChildViewController(newViewController)
         self.addSubview(newViewController.view, toView:self.containerView!)
         
@@ -438,22 +476,22 @@ class HomeViewController: UIViewController {
         newViewController.view.alpha = 0
         newViewController.view.layoutIfNeeded()
         
-        // Set the ending state of your constraints here
-        newViewController.view.alpha = 1
-        oldViewController.view.alpha = 0
+       
         
-        
-        
-        UIView.animateWithDuration(0.6, delay: 0, usingSpringWithDamping: 0.45, initialSpringVelocity: 0.7, options: [], animations: {
+        UIView.animate(withDuration: 0.1, delay: 0, options: [], animations: {
             
             // only need to call layoutIfNeeded here
             newViewController.view.layoutIfNeeded()
-
+            
+            // Set the ending state of your constraints here
+            newViewController.view.alpha = 1
+            oldViewController.view.alpha = 0
+            
             },
             completion: { finished in
                 oldViewController.view.removeFromSuperview()
                 oldViewController.removeFromParentViewController()
-                newViewController.didMoveToParentViewController(self)
+                newViewController.didMove(toParentViewController: self)
             })
 
     }

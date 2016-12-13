@@ -18,8 +18,8 @@ class DetailViewController: UIViewController {
     
 
     // Dismiss the current view controller and return to the layer under it
-    @IBAction func buttonPressed(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func buttonPressed(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
     }
     
     
@@ -31,8 +31,8 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.blueColor()
-        view.opaque = false
+        view.backgroundColor = UIColor.blue
+        view.isOpaque = false
         self.view.layer.zPosition = 0
         
 //        self.view.bringSubviewToFront((self.myVC?.navigationView)!)
@@ -46,7 +46,7 @@ class DetailViewController: UIViewController {
     }
     
     // Helper function to set colors with Hex values
-    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+    func UIColorFromRGB(_ rgbValue: UInt) -> UIColor {
         return UIColor(
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
