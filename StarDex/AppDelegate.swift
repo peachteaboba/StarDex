@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func moveToVC(_ destination: HomeViewController) {
 
         
-        // Change the Root View Controller form the loadingVC to the homeVC
+        // Change the Root View Controller from the loadingVC to the homeVC
         self.window?.rootViewController = destination
         self.window?.makeKeyAndVisible()
         
